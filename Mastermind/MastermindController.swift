@@ -11,20 +11,27 @@ import Foundation
 class MastermindController {
     
     // Couleurs : Jaune, Bleu, Rouge, Vert, Blanc, Noir
-    let colorList : [String] = ["yellow", "blue", "red", "green", "white", "black"]
+    private let colorList : [String] = ["yellow", "blue", "red", "green", "white", "black"]
     //combinaison à trouver
-    var combination : [String] = []
+    private var combination : [String] = []
     // 10 essaies possibles
-    var countTry : Int = 0
+    private var countTry : Int = 0
     
+    func getCombination() -> [String] {
+        return combination
+    }
+    
+    func setCombination(colorList: [String]) {
+        self.combination = colorList.map({$0.lowercased()})
+    }
     
     // Fonction qui va créer la combinaison
-    func GenerateCombination(length: Int) {
+    func generateRandomCombination(length: Int) {
         //clean la combinaison courante
-        combination.removeAll()
+        self.combination.removeAll()
         //ajoute de nouvelles couleurs suivant le nombre souhaité
         for _ in 0...length-1 {
-            combination.append(colorList[Int.random(in: 0...colorList.count-1)])
+            self.combination.append(self.colorList[Int.random(in: 0...self.colorList.count-1)])
         }
         
         print("Combinaison à trouver :"+combination.joined())
@@ -33,9 +40,9 @@ class MastermindController {
     //Fonction qui va comparer la combinaison proposé avec celle demandé
     func evaluate (newCombination : [String]) -> [Int] {
         
-        if combination.count != newCombination.count {
+        if self.combination.count != newCombination.count {
             print("le nombre de couleurs des combinaisons est différente")
-            return [0,0]
+            return [-1,-1]
         }
         
         var wellplaced: Int = 0

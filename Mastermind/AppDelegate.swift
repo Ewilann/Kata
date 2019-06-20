@@ -16,6 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        //Ajout de la vue principale
+        self.window = UIWindow(frame : UIScreen.main.bounds)
+        self.window!.backgroundColor =  UIColor.white
+        
+        var mainVC : UIViewController!
+        mainVC = ViewController(nibName: "ViewController", bundle: nil)
+        
+        self.window?.rootViewController = mainVC
+        self.window!.makeKeyAndVisible()
+        
         return true
     }
 
